@@ -1,0 +1,51 @@
+{% extends "../layouts/master.template" %}
+
+{% block content %}
+<div class="col-md-12">
+    <h3>{{ _("Current mailboxes (Virtual Users)") }}</h3>
+
+    <form method="get" action="" style="margin-bottom: 20px;">
+        <select onchange="this.form.submit()" class="form-control" style="width: 250px;" name="domain">
+            <option value="all"{% if not current_domain %} selected=""{% end %}>{{ _("Select a domain to filter by") }}</option>
+            {% for domain in domains %}
+            <option{% if domain.id == int(current_domain) %} selected=""{% end %} value="{{ domain.id }}">{{ domain.name }}</option>
+            {% end %}
+        </select>
+    </form>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 50px;">{{ _("ID") }}</th>
+            <th>{{ _("E-mail") }}</th>
+            <th>{{ _("Domin") }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for mailbox in mailboxes %}
+        <tr>
+            <td>{{ mailbox.id }}</td>
+            <td>{{ mailbox.email }}</td>
+            <td>{{ mailbox.domain.name }}</td>
+        </tr>
+        {% end %}
+        </tbody>
+    </table>
+
+    <form class="form-inline" method="POST" action="">
+        <h4>{{ _("Create a new mailbox") }}</h4>
+        <div class="form-group">
+            <input style="width: 250px;" autofocus="" type="email" class="form-control" required="" placeholder="{{ _("E-mail (addr)") }}" name="username">
+            <input type="password" class="form-control" required="" placeholder="{{ _("Password") }}" name="password">
+            <select name="domain" title="{{ _("Select a domain") }}" class="form-control">
+                <option selected="" value="no_option_selected">{{ _("Select a domain") }}</option>
+                {% for domain in domains %}
+                <option value="{{ domain.id }}">{{ domain.name }}</option>
+                {% end %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ _("Create") }}</button>
+    </form>
+</div>
+{% end %}

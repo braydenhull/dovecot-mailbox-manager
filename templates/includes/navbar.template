@@ -1,0 +1,35 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ reverse_url('Domains') }}">{{ project_name }}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li{% if title == 'Domains' %} class="active"{% end %}><a href="{{ reverse_url('Domains') }}"><i class="fa fa-sitemap"></i> {{ _("Domains") }}</a></li>
+                <li{% if title == 'Mailboxes' %} class="active"{% end %}><a href="{{ reverse_url('Mailboxes') }}"><i class="fa fa-inbox"></i> {{ _("Mailboxes") }}</a></li>
+                <li{% if title == 'Aliases' %} class="active"{% end %}><a href="{{ reverse_url('Aliases') }}"><i class="fa fa-clone"></i> {{ _("Aliases") }}</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                {% if not authenticated %}
+                    <li><a href="{{ reverse_url('Login') }}">{{ _("Login") }}</a></li>
+                {% else %}
+                    <li><a href="#">{{ current_user }}</a></li>
+                    <li><a href="{{ reverse_url('Logout') }}">{{ _("Logout") }}</a></li>
+                {% end %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ _("Language") }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ reverse_url('SetLanguage') }}?language=en_US">English (US)</a></li>
+                        <li><a href="{{ reverse_url('SetLanguage') }}?language=en_AU">English (AU)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

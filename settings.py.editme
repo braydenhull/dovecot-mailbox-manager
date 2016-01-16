@@ -1,0 +1,17 @@
+# Rename this file to settings.py after editing
+
+class Settings:
+    class WebServer:
+        Port = 20789
+        Address = None # Listen on all
+
+    class Database:
+        Address = "localhost"
+        Port = 3306
+        Username = "mail"
+        Password = "somepassword"
+        DatabaseName = "mail"
+
+    class Language:
+        DefaultLanguage = "en_US"
+        TranslationFolder = "translations/"

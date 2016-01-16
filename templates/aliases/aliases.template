@@ -1,0 +1,53 @@
+{% extends "../layouts/master.template" %}
+
+{% block content %}
+<div class="col-md-12">
+    <h3>{{ _("Current aliases (Virtual Aliases)") }}</h3>
+
+    <form method="GET" action="" style="margin-bottom: 20px;">
+        <select onchange="this.form.submit();" class="form-control" style="width: 250px;" name="domain">
+            <option value="all"{% if not current_domain %} selected=""{% end %}>{{ _("Select a domain to filter by") }}</option>
+            {% for domain in domains %}
+            <option{% if domain.id == int(current_domain) %} selected=""{% end %} value="{{ domain.id }}">{{ domain.name }}</option>
+            {% end %}
+        </select>
+    </form>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 50px;">{{ _("ID") }}</th>
+            <th>{{ _("Source") }}</th>
+            <th>{{ _("Destination") }}</th>
+            <th>{{ _("Domain") }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for alias in aliases %}
+        <tr>
+            <td>{{ alias.id }}</td>
+            <td>{{ alias.source }}</td>
+            <td>{{ alias.destination }}</td>
+            <td>{{ alias.domain.name }}</td>
+        </tr>
+        {% end %}
+        </tbody>
+    </table>
+
+    <form class="form-inline" method="POST" action="">
+        <h4>{{ _("Create an alias") }}</h4>
+        <div class="form-group">
+            <input style="width: 200px;" autofocus="" type="email" class="form-control" required="" placeholder="{{ _("Source e-mail") }}" name="source">
+            <input style="width: 200px;" autofocus="" type="email" class="form-control" required="" placeholder="{{ _("Destination e-mail") }}" name="destination">
+            <select name="domain" title="{{ _("Select a domain") }}" class="form-control">
+                <option selected="" value="no_option_selected">{{ _("Select a domain") }}</option>
+                {% for domain in domains %}
+                <option value="{{ domain.id }}">{{ domain.name }}</option>
+                {% end %}
+            </select>
+            <button type="submit" class="btn btn-primary">{{ _("Create") }}</button>
+            <span class="help-block">{{ _("Source and destination have to be the same domain, example myalias@example.com and realinbox@example.com") }}</span>
+        </div>
+    </form>
+</div>
+{% end %}

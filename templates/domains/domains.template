@@ -1,0 +1,32 @@
+{% extends "../layouts/master.template" %}
+
+{% block content %}
+<div class="col-md-12">
+    <h3>{{ _("Current domains (Virtual Domains)") }}</h3>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="width: 50px;">{{ _("ID") }}</th>
+            <th>{{ _("Domain Name") }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for domain in domains %}
+        <tr>
+            <td>{{ domain.id }}</td>
+            <td>{{ domain.name }}</td>
+        </tr>
+        {% end %}
+        </tbody>
+    </table>
+
+    <form class="form-inline" method="POST" action="">
+        <h4>{{ _("Create a domain") }}</h4>
+        <div class="form-group">
+            <input autofocus style="width: 200px;" type="text" class="form-control" required="" placeholder="{{ _("Domain (mail.example.com)") }}" name="domain">
+        </div>
+        <button type="submit" class="btn btn-primary">{{ _("Create") }}</button>
+    </form>
+</div>
+{% end %}
