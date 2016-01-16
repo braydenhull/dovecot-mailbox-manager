@@ -1,4 +1,4 @@
-{% extends "../layouts/master.template" %}
+{% extends "layouts/master.template" %}
 
 {% block content %}
 <div class="col-md-12">

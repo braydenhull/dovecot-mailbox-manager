@@ -32,8 +32,8 @@ class Application(tornado.web.Application):
             static_hash_cache=False,
             serve_traceback=True,
             gzip=True,
-            template_path=os.path.join(os.path.dirname(__file__), 'templates'),
-            static_path=os.path.join(os.path.dirname(__file__), 'static'),
+            template_path=os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates')),
+            static_path=os.path.abspath(os.path.join(os.path.dirname(__file__), 'static')),
             login_url='/login'
         )
 
