@@ -24,7 +24,7 @@ class Profile(Base):
         elif self.get_argument("action") == "update_username":
             new_username = self.get_argument("new_username")
             if len(new_username) > 128:
-                self.render(template, message=self.locale.translate("New username too long"))
+                self.render(template, message=self.locale.translate("New username too long"), success=None)
             else:
                 try:
                     self.application.authentication.change_username(self.current_user, new_username)
