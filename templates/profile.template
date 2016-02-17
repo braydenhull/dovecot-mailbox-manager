@@ -1,0 +1,40 @@
+{% extends "layouts/master.template" %}
+
+{% block content %}
+<div class="col-md-12">
+    <h3>{{ _("Manage web user") }}</h3>
+
+    {% if message %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% end %}
+
+    {% if success %}
+        <div class="alert alert-success">
+            {{ _("Successfully updated profile") }}
+        </div>
+    {% end %}
+
+    <form class="form-inline" method="POST" action="">
+        <h4>{{ _("Change password") }}</h4>
+        <input type="hidden" name="action" value="update_password">
+        <div class="form-group">
+            <input style="width: 200px;" type="password" class="form-control" required="" placeholder="{{ _("New password") }}" name="new_password">
+            <input style="width: 200px;" type="password" class="form-control" required="" placeholder="{{ _("Confirm new password") }}" name="confirm_password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ _("Update Password") }}</button>
+    </form>
+
+    <form class="form-inline" method="POST" action="">
+        <h4>{{ _("Update current username") }}</h4>
+        <input type="hidden" name="action" value="update_username">
+        <div class="form-group">
+            <input style="width: 250px;" type="text" maxlength="128" class="form-control" required="" value="{{ current_user }}" name="new_username">
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ _("Update Username") }}</button>
+    </form>
+</div>
+{% end %}

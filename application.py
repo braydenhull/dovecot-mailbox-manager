@@ -22,6 +22,7 @@ from handlers.MailboxHandler import *
 from handlers.DomainHandler import *
 from handlers.LocaleHandler import *
 from handlers.AliasHandler import *
+from handlers.ProfileHandler import *
 
 
 class Application(tornado.web.Application):
@@ -44,6 +45,7 @@ class Application(tornado.web.Application):
             url('/logout', Logout, name="Logout"),
             url('/set_language', SetLanguage, name="SetLanguage"),
             url('/aliases', Aliases, name="Aliases", kwargs={'title': 'Aliases'}),
+            url('/profile', Profile, name="Profile", kwargs={'title': 'Profile'})
         ]
 
 

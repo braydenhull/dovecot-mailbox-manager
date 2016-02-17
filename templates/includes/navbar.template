@@ -19,7 +19,7 @@
                 {% if not authenticated %}
                     <li><a href="{{ reverse_url('Login') }}">{{ _("Login") }}</a></li>
                 {% else %}
-                    <li><a href="#">{{ current_user }}</a></li>
+                    <li><a href="{{ reverse_url("Profile") }}">{{ current_user }}</a></li>
                     <li><a href="{{ reverse_url('Logout') }}">{{ _("Logout") }}</a></li>
                 {% end %}
                 <li class="dropdown">

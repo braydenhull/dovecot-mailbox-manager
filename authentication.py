@@ -57,6 +57,12 @@ class Authentication(object):
         except DoesNotExist:
             raise self.BadUser(username)
 
+    def change_username(self, old_username: str, new_username: str):
+        try:
+            self.application.database.Users.update(Username=new_username).where(self.application.database.Users.Username == old_username).execute()
+        except DoesNotExist:
+            raise self.BadUser(old_username)
+
     def check_session(self, username: str, session: str) -> bool:
         try:
             self.application.database.Sessions.select().where(self.application.database.Sessions.Session == session,
