@@ -3,17 +3,18 @@ __author__ = 'brayden'
 from . import Base
 from tornado.web import asynchronous
 from urllib.parse import urlparse
+import os
 
 
 class Login(Base):
     @asynchronous
     def get(self):
-        template = self.template_path + "/login.template"
+        template = os.path.join(self.template_path, "login.template")
         self.render(template, message=None, username=None)
 
     @asynchronous
     def post(self):
-        template = self.template_path + "/login.template"
+        template = os.path.join(self.template_path, "login.template")
         if all(k in self.request.arguments for k in ("username", "password")):
             try:
                 if self.application.authentication.check_credentials(self.get_argument('username'), self.get_argument('password')):

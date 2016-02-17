@@ -1,12 +1,13 @@
 from . import Base
 from tornado.web import asynchronous, authenticated
+import os
 
 
 class Aliases(Base):
     @asynchronous
     @authenticated
     def get(self):
-        template = self.template_path + "/aliases.template"
+        template = os.path.join(self.template_path, "aliases.template")
         if self.get_argument("domain", False) and not self.get_argument("domain") == "all":
             self.render(template,
                 aliases=self.application.database.VirtualAliases.select().where(self.application.database.VirtualAliases.domain == int(self.get_argument("domain"))).join(self.application.database.VirtualDomains),
@@ -23,7 +24,7 @@ class Aliases(Base):
     @asynchronous
     @authenticated
     def post(self):
-        template = self.template_path + "/aliases.template"
+        template = os.path.join(self.template_path, "aliases.template")
         if all(k in self.request.arguments for k in ("source", "destination", "domain")):
             self.application.database.VirtualAliases.create(
                 source=self.get_argument('source'),

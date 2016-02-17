@@ -3,13 +3,14 @@ __author__ = 'brayden'
 from . import Base
 from tornado.web import asynchronous, authenticated
 from passlib.hash import sha512_crypt
+import os
 
 
 class Mailboxes(Base):
     @asynchronous
     @authenticated
     def get(self):
-        template = self.template_path + "/mailboxes.template"
+        template = os.path.join(self.template_path, "mailboxes.template")
         if self.get_argument("domain", False) and not self.get_argument("domain") == "all":
             self.render(template,
                         mailboxes=self.application.database.VirtualUsers.select().where(
@@ -26,7 +27,7 @@ class Mailboxes(Base):
     @asynchronous
     @authenticated
     def post(self):
-        template = self.template_path + "/mailboxes.template"
+        template = os.path.join(self.template_path, "mailboxes.template")
         if all(k in self.request.arguments for k in ("username", "password", "domain")):
             # Thanks a bajillion to ppjet6 for the passlib example, https://bitbucket.org/ppjet6/dovecot-passgen/
             rounds = 5000
