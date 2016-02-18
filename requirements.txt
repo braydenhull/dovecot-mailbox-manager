@@ -2,3 +2,4 @@ tornado
 peewee
 passlib
 PyMySQL
+click
