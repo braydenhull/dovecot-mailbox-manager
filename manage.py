@@ -6,6 +6,7 @@ import click
 import getpass
 import sys
 
+# Credit to benbacardi for the colours library, which I stole this array from. https://github.com/benbacardi/colours
 COLOURS = {
     'BLACK': '\033[30m',
     'BLUE': '\033[34m',
