@@ -11,4 +11,4 @@ class SetLanguage(Base):
             if language in tornado.locale.get_supported_locales():
                 self.set_cookie('language', language)
 
-        self.redirect(self.request.headers.get('Referrer', '/'))
+        self.redirect(self.request.headers.get('Referer', '/'))
